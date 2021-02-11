@@ -11,7 +11,7 @@ voices = engine.getProperty('voices')
 print(voices[1].id)
 engine.setProperty('voice', voices[0].id)
 
-pleasing = ['Thanks', 'Appreciated', 'Good Morning', 'Good Evening', ]
+pleasing = ['Thanks', 'Appreciated', 'Good Morning', 'Good Evening']
 
 
 
@@ -67,7 +67,7 @@ def sendEmail(to, content):
 
 if __name__ == "__main__":
     ''' Function that wishes the user whenever the program is started '''
-    # wishMe()
+    wishMe()
 
     while True:
     # if 1:
@@ -81,10 +81,6 @@ if __name__ == "__main__":
             speak("According to Wikipedia") 
             print(results)
             speak(results)
-
-        elif pleasing in query:
-            print('Thankyou Sir, I am please that you are satisfied by my service.')
-            speak('Thankyou Sir, I am please that you are satisfied by my service.')
 
         elif 'open youtube' in query:
             webbrowser.open("youtube.com")
