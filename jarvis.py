@@ -122,3 +122,8 @@ if __name__ == "__main__":
 
         elif 'show voice id' in query:
             show_voice_id()
+
+        else:
+            print("Sorry I couldnt do that")
+            speak("Sorry I couldnt do that")
+            return
