@@ -1,3 +1,4 @@
 import jarvis
 
-jarvis.show_voice_id()
+command = input("Enter the command: ")
+
