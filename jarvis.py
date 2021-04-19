@@ -15,7 +15,7 @@ engine.setProperty('voice', voices[0].id)
 pleasing = ['Thanks', 'Appreciated', 'Good Morning', 'Good Evening']
 # Adding the wordlist if user is happy with the AI
 
-def show_voice_id:
+def show_voice_id():
     printf("The voice id is {voices[1].id}")
 
 def speak(audio):
