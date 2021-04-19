@@ -61,8 +61,8 @@ def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
-    server.login('dhangardhruva9@gmail.com', '124547@dd')
-    server.sendmail('dhangardhruva9@gmail.com', to, content)
+    server.login('your_eamil_address@gmail.com', 'your_email_password')
+    server.sendmail('your_email_adddress@gmail.com', to, content)
     server.close()
 
 if __name__ == "__main__":
@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
 
         elif 'play music' in query:
-            music_dir = 'C:\\Users\\dhang\\Desktop\\Storage\\Projects\\JarvisAI'
+            music_dir = 'Your music directory'
             songs = os.listdir(music_dir)
             print(songs)    
             os.startfile(os.path.join(music_dir, songs[0]))
@@ -103,14 +103,14 @@ if __name__ == "__main__":
             speak(f"Sir, the time is {strTime}")
 
         elif 'open code' in query:
-            codePath = "C:\\Users\\dhang\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+            codePath = "C:\\Users\\'Your username'\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codePath)
 
         elif 'email to harry' in query:
             try:
                 speak("What should I say?")
                 content = takeCommand()
-                to = "harryyourEmail@gmail.com"    
+                to = "recievers_email_address@gmail.com"    
                 sendEmail(to, content)
                 speak("Email has been sent!")
             except Exception as e:
