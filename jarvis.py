@@ -6,14 +6,17 @@ import webbrowser
 import os
 import smtplib
 
+# Engine is the voice the AI would use to speak
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-print(voices[1].id)
+# print(voices[1].id)
 engine.setProperty('voice', voices[0].id)
 
 pleasing = ['Thanks', 'Appreciated', 'Good Morning', 'Good Evening']
+# Adding the wordlist if user is happy with the AI
 
-
+def show_voice_id:
+    printf("The voice id is {voices[1].id}")
 
 def speak(audio):
     engine.say(audio)
@@ -115,4 +118,7 @@ if __name__ == "__main__":
                 speak("Email has been sent!")
             except Exception as e:
                 print(e)
-                speak("Sorry my friend . I am not able to send this email")    
+                speak("Sorry my friend . I am not able to send this email")
+
+        elif 'show voice id' in query:
+            show_voice_id()
