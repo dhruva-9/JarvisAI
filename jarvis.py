@@ -16,7 +16,7 @@ pleasing = ['Thanks', 'Appreciated', 'Good Morning', 'Good Evening']
 # Adding the wordlist if user is happy with the AI
 
 def show_voice_id():
-    printf("The voice id is {voices[1].id}")
+    print("The voice ID is ", voices[1].id)
 
 def speak(audio):
     engine.say(audio)
