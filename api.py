@@ -1,4 +1,3 @@
-import jarvis
+import os
 
-command = input("Enter the command: ")
-
+print(os.listdir())
