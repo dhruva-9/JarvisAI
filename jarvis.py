@@ -37,7 +37,7 @@ def wishMe():
         print("Good Evening!")  
         speak("Good Evening!")  
 
-    # speak("I am Jarvis Sir. Please tell me how may I help you")       
+    speak("I am Jarvis Sir. Please tell me how may I help you")       
     print("I am Jarvis Sir. Please tell me how may I help you")       
 
 def takeCommand():
@@ -114,15 +114,17 @@ if __name__ == "__main__":
 
         elif 'send email' in query:
             try:
+                speak("Enter the emeil address of the person whom the e-meil has to be send")
+    
+                to = input("Enter the emeil address of the person whom the e-meil has to be send: ")
+
                 speak("What should I say?")
                 content = takeCommand()
-                speak("Ro whom should I send this email to?")
-                to = tekeCommand()
-                if sendEmail(to, content):
-                    speak("Email has been sent!")
-                else:
-                    print("Couldnt send this i emaiol. Check if the email address is correct", to)
-                    speak("Couldnt send this i emaiol. Check if the email address is correct")
+
+                sendEmail(to, content):
+                speak("Email has been sent!")
+                print("Email has been sent!")
+
             except Exception as e:
                 print(e)
                 speak("Sorry my friend . I am not able to send this email")
