@@ -5,6 +5,7 @@ import wikipedia #pip install wikipedia
 import webbrowser
 import os
 import smtplib
+import json
 
 # Engine is the voice the AI would use to speak
 engine = pyttsx3.init('sapi5')
@@ -22,7 +23,6 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
-
 def wishMe():
     hour = int(datetime.datetime.now().hour)
     if hour>=0 and hour<12:
@@ -37,7 +37,7 @@ def wishMe():
         print("Good Evening!")  
         speak("Good Evening!")  
 
-    speak("I am Jarvis Sir. Please tell me how may I help you")       
+    # speak("I am Jarvis Sir. Please tell me how may I help you")       
     print("I am Jarvis Sir. Please tell me how may I help you")       
 
 def takeCommand():
@@ -61,12 +61,15 @@ def takeCommand():
     return query
 
 def sendEmail(to, content):
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
-    server.login('your_eamil_address@gmail.com', 'your_email_password')
-    server.sendmail('your_email_adddress@gmail.com', to, content)
-    server.close()
+    # Getting the email credentials from json file and entering the valuesover here
+    with open('email.json') as f:
+        data = json.load(f)
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.ehlo()
+        server.starttls()
+        server.login(data['email'], data['password'])
+        server.sendmail(data['email'], to, content)
+        server.close()
 
 if __name__ == "__main__":
     ''' Function that wishes the user whenever the program is started '''
@@ -109,19 +112,28 @@ if __name__ == "__main__":
             codePath = "C:\\Users\\'Your username'\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codePath)
 
-        elif 'email to harry' in query:
+        elif 'send email' in query:
             try:
                 speak("What should I say?")
                 content = takeCommand()
-                to = "recievers_email_address@gmail.com"    
-                sendEmail(to, content)
-                speak("Email has been sent!")
+                speak("Ro whom should I send this email to?")
+                to = tekeCommand()
+                if sendEmail(to, content):
+                    speak("Email has been sent!")
+                else:
+                    print("Couldnt send this i emaiol. Check if the email address is correct", to)
+                    speak("Couldnt send this i emaiol. Check if the email address is correct")
             except Exception as e:
                 print(e)
                 speak("Sorry my friend . I am not able to send this email")
 
         elif 'show voice id' in query:
             show_voice_id()
+        
+        elif 'return' in query:
+            speak("Sleeping...")
+            print("Sleeping...")
+            break
 
         else:
             print("Sorry I couldnt do that")
