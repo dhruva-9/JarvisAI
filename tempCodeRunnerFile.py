@@ -1,6 +1,0 @@
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.ehlo()
-        server.starttls()
-        server.login(data['email'], data['password'])
-        server.sendmail(data['email'], to, content)
-        server.close()

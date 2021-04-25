@@ -6,6 +6,7 @@ import webbrowser
 import os
 import smtplib
 import json
+import restartSystem as rs
 
 # Engine is the voice the AI would use to speak
 engine = pyttsx3.init('sapi5')
@@ -75,68 +76,74 @@ if __name__ == "__main__":
     ''' Function that wishes the user whenever the program is started '''
     wishMe()
 
-    while True:
-    # if 1:
-        query = takeCommand().lower()
+    try:
+        while True:
+        # if 1:
+            query = takeCommand().lower()
 
-        # Logic for executing tasks based on query
-        if 'wikipedia' in query:
-            speak('Searching Wikipedia...')
-            query = query.replace("wikipedia", "")
-            results = wikipedia.summary(query, sentences=2)# Can change the number of lines by changes sentences=
-            speak("According to Wikipedia") 
-            print(results)
-            speak(results)
+            # Logic for executing tasks based on query
+            if 'wikipedia' in query:
+                speak('Searching Wikipedia...')
+                query = query.replace("wikipedia", "")
+                results = wikipedia.summary(query, sentences=2)# Can change the number of lines by changes sentences=
+                speak("According to Wikipedia") 
+                print(results)
+                speak(results)
 
-        elif 'open youtube' in query:
-            webbrowser.open("youtube.com")
+            elif 'open youtube' in query:
+                webbrowser.open("youtube.com")
 
-        elif 'open google' in query:
-            webbrowser.open("google.com")
+            elif 'open google' in query:
+                webbrowser.open("google.com")
 
-        elif 'open stackoverflow' in query:
-            webbrowser.open("stackoverflow.com")   
+            elif 'open stackoverflow' in query:
+                webbrowser.open("stackoverflow.com")   
 
 
-        elif 'play music' in query:
-            music_dir = 'Your music directory'
-            songs = os.listdir(music_dir)
-            print(songs)    
-            os.startfile(os.path.join(music_dir, songs[0]))
+            elif 'play music' in query:
+                music_dir = 'Your music directory'
+                songs = os.listdir(music_dir)
+                print(songs)    
+                os.startfile(os.path.join(music_dir, songs[0]))
 
-        elif 'the time' in query:
-            strTime = datetime.datetime.now().strftime("%H:%M:%S")    
-            speak(f"Sir, the time is {strTime}")
+            elif 'the time' in query:
+                strTime = datetime.datetime.now().strftime("%H:%M:%S")    
+                speak(f"Sir, the time is {strTime}")
 
-        elif 'open code' in query:
-            codePath = "C:\\Users\\'Your username'\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
-            os.startfile(codePath)
+            elif 'open code' in query:
+                codePath = "C:\\Users\\'Your username'\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+                os.startfile(codePath)
 
-        elif 'send email' in query:
-            try:
-                speak("Enter the emeil address of the person whom the e-meil has to be send")
-    
-                to = input("Enter the emeil address of the person whom the e-meil has to be send: ")
-
-                speak("What should I say?")
-                content = takeCommand()
-
-                sendEmail(to, content):
-                speak("Email has been sent!")
-                print("Email has been sent!")
-
-            except Exception as e:
-                print(e)
-                speak("Sorry my friend . I am not able to send this email")
-
-        elif 'show voice id' in query:
-            show_voice_id()
+            elif 'send email' in query:
+                try:
+                    speak("Enter the emeil address of the person whom the e-meil has to be send")
         
-        elif 'return' in query:
-            speak("Sleeping...")
-            print("Sleeping...")
-            break
+                    to = input("Enter the emeil address of the person whom the e-meil has to be send: ")
 
-        else:
-            print("Sorry I couldnt do that")
-            speak("Sorry I couldnt do that")
+                    speak("What should I say?")
+                    content = takeCommand()
+
+                    sendEmail(to, content)
+                    speak("Email has been sent!")
+                    print("Email has been sent!")
+
+                except Exception as e:
+                    print(e)
+                    speak("Sorry my friend . I am not able to send this email")
+
+            elif 'show voice id' in query:
+                show_voice_id()
+            
+            elif 'return' in query:
+                speak("Sleeping...")
+                print("Sleeping...")
+                break
+
+            else:
+                print("Sorry I couldnt do that")
+                speak("Sorry I couldnt do that")
+    
+    except Exception as e:
+        print(e)
+        speak("Couldnt do the work.")
+        rs.restart(2)
