@@ -6,7 +6,7 @@ import webbrowser
 import os
 import smtplib
 import json
-import restartSystem as rs
+
 
 # Engine is the voice the AI would use to speak
 engine = pyttsx3.init('sapi5')
@@ -14,16 +14,13 @@ voices = engine.getProperty('voices')
 # print(voices[1].id)
 engine.setProperty('voice', voices[0].id)
 
-pleasing = ['Thanks', 'Appreciated', 'Good Morning', 'Good Evening']
-# Adding the wordlist if user is happy with the AI
-
-def show_voice_id():
-    print("The voice ID is ", voices[1].id)
-
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
+def show_voice_id():
+    print("The voice ID is ", voices[1].id)
+    
 def wishMe():
     hour = int(datetime.datetime.now().hour)
     if hour>=0 and hour<12:
@@ -62,7 +59,7 @@ def takeCommand():
     return query
 
 def sendEmail(to, content):
-    # Getting the email credentials from json file and entering the valuesover here
+    # Getting the email credentials from json file
     with open('email.json') as f:
         data = json.load(f)
         server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -73,7 +70,6 @@ def sendEmail(to, content):
         server.close()
 
 if __name__ == "__main__":
-    ''' Function that wishes the user whenever the program is started '''
     wishMe()
 
     try:
@@ -101,10 +97,9 @@ if __name__ == "__main__":
 
 
             elif 'play music' in query:
-                music_dir = 'Your music directory'
-                songs = os.listdir(music_dir)
+                songs = os.listdir("songs")
                 print(songs)    
-                os.startfile(os.path.join(music_dir, songs[0]))
+                os.startfile(os.path.join("songs", songs[0]))
 
             elif 'the time' in query:
                 strTime = datetime.datetime.now().strftime("%H:%M:%S")    
@@ -146,4 +141,3 @@ if __name__ == "__main__":
     except Exception as e:
         print(e)
         speak("Couldnt do the work.")
-        rs.restart(2)
